@@ -11,6 +11,11 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Test Wilayah API
+Route::get('test-wilayah', App\Livewire\TestWilayah::class)
+    ->middleware(['auth'])
+    ->name('test.wilayah');
+
 // Admin routes
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(function () {
     // Admin specific routes will be added here
