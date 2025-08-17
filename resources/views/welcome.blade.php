@@ -189,7 +189,34 @@
                 </div>
             </section>
 
-            <!-- CTA Section -->
+            <!-- Bidan CTA Section -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl p-12 text-white text-center">
+                    <h3 class="text-3xl font-bold mb-4">Anda Seorang Bidan?</h3>
+                    <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                        Bergabunglah dengan platform kami dan jangkau lebih banyak pasien. Tingkatkan praktik Anda dengan sistem booking modern.
+                    </p>
+                    @guest
+                        <a href="{{ route('register.bidan') }}" 
+                           class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 inline-block">
+                            Daftar Sebagai Bidan
+                        </a>
+                    @else
+                        @if(auth()->user()->role === 'bidan')
+                            <a href="{{ url('/dashboard') }}" 
+                               class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 inline-block">
+                                Dashboard Bidan
+                            </a>
+                        @else
+                            <span class="bg-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">
+                                Anda sudah terdaftar sebagai {{ ucfirst(auth()->user()->role) }}
+                            </span>
+                        @endif
+                    @endguest
+                </div>
+            </section>
+
+            <!-- Patient CTA Section -->
             <section class="text-center">
                 <div class="bg-gradient-to-r from-pink-500 to-rose-500 rounded-3xl p-12 text-white">
                     <h3 class="text-3xl font-bold mb-4">Siap Memulai Perjalanan Kesehatan Anda?</h3>

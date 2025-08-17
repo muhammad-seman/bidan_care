@@ -7,6 +7,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// Bidan Registration (Guest only)
+Route::get('register/bidan', App\Livewire\Auth\BidanRegistration::class)
+    ->middleware('guest')
+    ->name('register.bidan');
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -18,7 +23,8 @@ Route::get('test-wilayah', App\Livewire\TestWilayah::class)
 
 // Admin routes
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(function () {
-    // Admin specific routes will be added here
+    Route::get('bidan-verification', App\Livewire\Admin\BidanVerification::class)
+        ->name('admin.bidan.verification');
 });
 
 // Bidan routes  
