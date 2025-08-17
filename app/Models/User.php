@@ -104,4 +104,36 @@ class User extends Authenticatable
             default => 'Unknown'
         };
     }
+
+    // Profile relationships
+    public function bidanProfile()
+    {
+        return $this->hasOne(BidanProfile::class);
+    }
+
+    public function patientProfile()
+    {
+        return $this->hasOne(PatientProfile::class);
+    }
+
+    // Booking relationships
+    public function patientBookings()
+    {
+        return $this->hasMany(Booking::class, 'patient_id');
+    }
+
+    public function patientReviews()
+    {
+        return $this->hasMany(Review::class, 'patient_id');
+    }
+
+    // Helper to get appropriate profile
+    public function getProfileAttribute()
+    {
+        return match($this->role) {
+            'bidan' => $this->bidanProfile,
+            'pasien' => $this->patientProfile,
+            default => null
+        };
+    }
 }
