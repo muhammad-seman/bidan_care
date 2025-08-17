@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
+
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+// Admin routes
+Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(function () {
+    // Admin specific routes will be added here
+});
+
+// Bidan routes  
+Route::middleware(['auth', 'verified', 'role:bidan'])->prefix('bidan')->group(function () {
+    // Bidan specific routes will be added here
+});
+
+// Pasien routes
+Route::middleware(['auth', 'verified', 'role:pasien'])->prefix('pasien')->group(function () {
+    // Pasien specific routes will be added here
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::redirect('settings', 'settings/profile');
+
+    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
+    Volt::route('settings/password', 'settings.password')->name('settings.password');
+    Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+});
+
+require __DIR__.'/auth.php';
