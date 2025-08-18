@@ -17,10 +17,13 @@ return new class extends Migration
             
             // License & Verification
             $table->string('license_number')->unique();
-            $table->string('license_file_path')->nullable();
-            $table->enum('verification_status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('specialization'); // Single specialization for simplicity
+            $table->integer('experience_years')->default(0);
+            $table->text('bio')->nullable();
+            $table->enum('verification_status', ['pending', 'verified', 'rejected'])->default('pending');
             $table->timestamp('verified_at')->nullable();
             $table->foreignId('verified_by')->nullable()->constrained('users');
+            $table->text('verification_notes')->nullable();
             
             // Location using external API IDs
             $table->string('province_id');
@@ -30,20 +33,17 @@ return new class extends Migration
             $table->text('detailed_address');
             $table->text('google_maps_link')->nullable();
             
-            // Professional Info
-            $table->text('bio')->nullable();
-            $table->integer('experience_years')->default(0);
-            $table->json('certification_files')->nullable(); // Array of file paths
-            $table->string('phone')->nullable();
-            $table->date('birth_date')->nullable();
+            // Document URLs
+            $table->string('license_document_url')->nullable();
+            $table->string('certification_document_url')->nullable();
+            $table->string('profile_photo_url')->nullable();
             
             // Practice Info
             $table->enum('practice_type', ['home_visit', 'clinic', 'both'])->default('both');
-            $table->text('specializations')->nullable();
             $table->boolean('emergency_available')->default(false);
             
             // Status
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false); // Default false until verified
             $table->decimal('rating_average', 3, 2)->default(0);
             $table->integer('total_reviews')->default(0);
             $table->integer('total_patients')->default(0);
