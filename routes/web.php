@@ -29,7 +29,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(fu
 
 // Bidan routes  
 Route::middleware(['auth', 'verified', 'role:bidan'])->prefix('bidan')->group(function () {
-    // Bidan specific routes will be added here
+    Route::get('services', App\Livewire\Bidan\ServiceManagement::class)
+        ->name('bidan.services');
 });
 
 // Pasien routes

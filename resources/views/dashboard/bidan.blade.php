@@ -201,7 +201,7 @@
             <p class="text-sm text-gray-600">Atur availability & booking</p>
         </a>
 
-        <a href="#" class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 text-center group">
+        <a href="{{ route('bidan.services') }}" class="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-200 text-center group">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
                 <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>

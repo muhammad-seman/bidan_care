@@ -2,7 +2,7 @@
     @if(auth()->user()->isAdmin())
         @include('dashboard.admin')
     @elseif(auth()->user()->isBidan())
-        @include('dashboard.bidan')
+        <livewire:bidan.dashboard />
     @else
         @include('dashboard.pasien')
     @endif
