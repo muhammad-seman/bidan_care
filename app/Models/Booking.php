@@ -15,8 +15,7 @@ class Booking extends Model
     protected $fillable = [
         'booking_number',
         'patient_id',
-        'bidan_id', 
-        'service_id',
+        'bidan_service_id',
         'availability_id',
         'booking_date',
         'start_time',
@@ -79,14 +78,21 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'patient_id');
     }
 
-    public function bidan(): BelongsTo
+    public function bidanService(): BelongsTo
     {
-        return $this->belongsTo(BidanProfile::class, 'bidan_id');
+        return $this->belongsTo(BidanService::class, 'bidan_service_id');
     }
 
+    // Get bidan through service relationship
+    public function bidan(): BelongsTo
+    {
+        return $this->hasOneThrough(BidanProfile::class, BidanService::class, 'id', 'id', 'bidan_service_id', 'bidan_id');
+    }
+
+    // Alias for backward compatibility
     public function service(): BelongsTo
     {
-        return $this->belongsTo(BidanService::class, 'service_id');
+        return $this->bidanService();
     }
 
     public function payment(): HasOne

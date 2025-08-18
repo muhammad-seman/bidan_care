@@ -17,8 +17,7 @@ return new class extends Migration
             
             // Core Relations
             $table->foreignId('patient_id')->constrained('users');
-            $table->foreignId('bidan_id')->constrained('bidan_profiles');
-            $table->foreignId('service_id')->constrained('bidan_services');
+            $table->foreignId('bidan_service_id')->constrained('bidan_services');
             $table->foreignId('availability_id')->nullable()->constrained('bidan_availability');
             
             // Schedule
